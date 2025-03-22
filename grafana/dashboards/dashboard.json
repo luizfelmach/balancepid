@@ -48,7 +48,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "always",
+            "showPoints": "auto",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -87,7 +87,7 @@
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
           "hideZeros": false,
@@ -98,6 +98,7 @@
       "pluginVersion": "11.5.2",
       "targets": [
         {
+          "alias": "P",
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -128,6 +129,7 @@
           "tags": []
         },
         {
+          "alias": "I",
           "datasource": {
             "type": "influxdb",
             "uid": "degm5elvamfwgb"
@@ -163,6 +165,7 @@
           "tags": []
         },
         {
+          "alias": "D",
           "datasource": {
             "type": "influxdb",
             "uid": "degm5elvamfwgb"
@@ -194,7 +197,8 @@
                 "type": "mean"
               }
             ]
-          ]
+          ],
+          "tags": []
         }
       ],
       "title": "PID",
@@ -279,7 +283,7 @@
           "tags": []
         }
       ],
-      "title": "Ângulo do Servo",
+      "title": "Ângulo da balança",
       "type": "gauge"
     },
     {
@@ -315,7 +319,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "always",
+            "showPoints": "auto",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -345,7 +349,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 19,
         "x": 0,
         "y": 7
@@ -356,7 +360,7 @@
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
           "hideZeros": false,
@@ -367,6 +371,7 @@
       "pluginVersion": "11.5.2",
       "targets": [
         {
+          "alias": "Distância",
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -397,6 +402,7 @@
           "tags": []
         },
         {
+          "alias": "Setpoint",
           "datasource": {
             "type": "influxdb",
             "uid": "degm5elvamfwgb"
@@ -420,7 +426,7 @@
           "select": [
             [
               {
-                "params": ["p"],
+                "params": ["setpoint"],
                 "type": "field"
               },
               {
@@ -465,7 +471,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "always",
+            "showPoints": "auto",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -494,10 +500,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 19,
         "x": 0,
-        "y": 13
+        "y": 14
       },
       "id": 1,
       "options": {
@@ -505,7 +511,7 @@
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
           "hideZeros": false,
@@ -516,6 +522,7 @@
       "pluginVersion": "11.5.2",
       "targets": [
         {
+          "alias": "Error",
           "datasource": {
             "type": "influxdb",
             "uid": "degm5elvamfwgb"
