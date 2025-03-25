@@ -44,6 +44,7 @@ float setpoint = 50;
 float error = 0, error_prev = 0;
 float pid_p, pid_i, pid_d, pid_total;
 float distance;
+float prev_distance;
 float servo_angle;
 
 int                 last_state_clk;
@@ -96,6 +97,7 @@ void setup() {
     last_state_clk = digitalRead(CLK);
     elapsed        = millis();
     elapsed_influx = millis();
+    prev_distance  = 0;
 
     xTaskCreatePinnedToCore(parallelTask, "ParallelTask", 10000, NULL, 1, NULL,
                             1);
@@ -156,7 +158,8 @@ void loop() {
         servo_angle = servo_angle < 90 ? 90 : servo_angle;
 
         servo.write(servo_angle);
-        error_prev = error;
+        error_prev    = error;
+        prev_distance = distance;
     }
 }
 
@@ -172,7 +175,12 @@ void send_to_influxdb() {
     sensor.addField("kp", kp);
     sensor.addField("ki", ki);
     sensor.addField("kd", kd);
+    float vel =
+        (float)(prev_distance - read_distance(100)) / ((float)period / 1000);
+    sensor.addField("vel", vel);
     sensor.addField("angle", (float)map(servo_angle, 90, 180, -40, 40));
+
+    Serial.println(vel);
 
     if (!client.writePoint(sensor)) {
         Serial.print("Falha no envio de dados: ");
